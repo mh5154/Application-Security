@@ -3,7 +3,7 @@
 #include "dictionary.h"
 #include "string.h"
 
-//test
+//test 2
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 {
@@ -70,7 +70,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     }
     else
     {
-        char *readWord[20];
+        char readWord[1000];
         int bucket = 0;
         while(fp != EOF)
         {
@@ -92,25 +92,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
                 newNode->next = hashtable[bucket];
                 hashtable[bucket] = newNode;
             }
-
-            /*node* temp = new node;
-            node* temp2;
-            temp->word = readWord;
-            temp->next = NULL;
-
-            hashtable[bucket]->next
-            if(hashtable[bucket]->next == NULL)
-            {
-                hashtable[bucket]->next = temp;
-            }
-            else
-            {
-                temp2 = hashtable[bucket]->next;
-                while(temp2->next != NULL)
-                    temp2 = temp2->next;
-                temp2->next = temp;
-                temp2 = NULL;
-            }*/
         }
         fclose(fp);
 
