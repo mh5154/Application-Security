@@ -2,27 +2,51 @@
 #include "stdlib.h"
 #include "dictionary.h"
 #include "string.h"
+#include "ctype.h"
 
-//test 2
+//test 3
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 {
     int num_misspelled = 0;
-    while(fp != EOF)
+    while(!feof(fp))
     {
-        char* readLine;
+        char readLine[LENGTH] = "";
+        char word[LENGTH] = "";
         fscanf(fp, "%[^\n]", readLine);
-        char* temp = strtok(readLine, "'");
-        if(check_word(temp, hashtable) == false)
+        //getline(readLine,LENGTH,fp);
+
+        for(int i = 0; i < LENGTH; i++) //Use LENGTH or strlen() here????
         {
-            strcat(misspelled, temp);
-            num_misspelled++;
+            if(isspace(readLine[i]))
+            {
+                if(ispunct(word[0]))
+                {
+                    for(int z = 0; z < strlen(word)-2; z++)
+                        word[z] = word[z+1];
+                }
+                if(ispunct(word[strlen(word)-1]))
+                {
+                    word[strlen(word)-1] = '\0';
+                }
+                if (check_word(word, hashtable) == false)
+                {
+                        misspelled[num_misspelled] = word;
+                        num_misspelled++;
+                }
+                for(int s = 0; s < word[strlen(word)-1]; s++)
+                    word[s] = '\0';
+            }
+            else
+            {
+                word[i] = readLine[i];
+            }
         }
+
     }
+
     return num_misspelled;
 }
-
-
 
 
 
@@ -30,29 +54,40 @@ bool check_word(const char* word, hashmap_t hashtable[])
 {
     int bucket = 0;
     bucket = hash_function(word);
-    hashmap_t = hashtable[bucket];
-    while(hashmap_t != NULL)
+    struct node* nodeCursor = hashtable[bucket];
+    while(nodeCursor != NULL)
     {
-        if(word == hashmap_t->word)
+        if(word == nodeCursor->word)
             return true;
-        hashmap_t = hashmap_t->next;
+        nodeCursor = nodeCursor->next;
     }
 
     bucket = hash_function(word);
-    hashmap_t = hashtable[bucket];
-    while(hashmap_t != NULL)
+    nodeCursor = hashtable[bucket];
+
+
+    int wordSize = strlen(word);
+    char lowerWord[LENGTH] = "";
+
+    for(int i = 0; i < wordSize; i++)
     {
-        if(strlwr(word) == hashmap_t->word)
+        if(ispunct(word[i]))
+            return false;
+        if(isupper(word[i]))
+            lowerWord[i] = word[i]+32;
+    }
+
+    while(nodeCursor != NULL)
+    {
+
+        if(lowerWord == nodeCursor->word)
             return true;
-        hashmap_t  = hashmap_t->next;
+        nodeCursor  = nodeCursor->next;
     }
 
     return false;
 
 }
-
-
-
 
 
 
@@ -70,9 +105,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     }
     else
     {
-        char readWord[1000];
+        char readWord[LENGTH];
         int bucket = 0;
-        while(fp != EOF)
+        while(!feof(fp))
         {
             fscanf(fp, "%[^\n]", readWord);
 
@@ -81,7 +116,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
             struct node* newNode = NULL;
             newNode = (struct node*)malloc(sizeof(struct node));
             newNode->next = NULL;
-            newNode->word = readWord;
+            strncpy(newNode->word,readWord,LENGTH);
 
             bucket = hash_function(readWord);
 
@@ -96,10 +131,5 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
         fclose(fp);
 
     }
+    return true;
 }
-
-/*
-int main() {
-    printf("Hello, World!\n");
-    return 0;
-}*/
