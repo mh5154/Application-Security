@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "dictionary.h"
+#include "dictionary.c"
 #include "string.h"
 #include "ctype.h"
 
@@ -98,9 +99,11 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
         hashtable[i] = NULL;
     }
 
-    FILE *fp = fopen("wordlist.txt", "r");
+    FILE *fp;
+    fp = fopen(dictionary_file, "r");
     if(fp == NULL)
     {
+        printf("we here");
         return false;
     }
     else
