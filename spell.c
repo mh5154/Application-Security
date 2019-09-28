@@ -5,7 +5,7 @@
 #include "string.h"
 #include "ctype.h"
 
-//test 3
+//10AM9/28
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 {
@@ -17,7 +17,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
         fscanf(fp, "%[^\n]", readLine);
         //getline(readLine,LENGTH,fp);
 
-        for(int i = 0; i < LENGTH; i++) //Use LENGTH or strlen() here????
+        for(int i = 0; i < strlen(word); i++) //Use LENGTH or strlen() here????
         {
             if(isspace(readLine[i]))
             {
@@ -103,18 +103,16 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     fp = fopen(dictionary_file, "r");
     if(fp == NULL)
     {
-        printf("we here");
         return false;
     }
     else
     {
         char readWord[LENGTH];
         int bucket = 0;
-        while(!feof(fp))
+        fclose(fp);
+        //while(!feof(fp))
+        while(fscanf(fp, "%[^\n]", readWord) != EOF)
         {
-            fscanf(fp, "%[^\n]", readWord);
-
-
 
             struct node* newNode = NULL;
             newNode = (struct node*)malloc(sizeof(struct node));
@@ -131,8 +129,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
                 hashtable[bucket] = newNode;
             }
         }
-        fclose(fp);
 
     }
+    //printf("Dictionary Loaded! \n");
     return true;
 }

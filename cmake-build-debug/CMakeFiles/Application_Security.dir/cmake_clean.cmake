@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Application_Security.dir/main.c.o"
-  "Application_Security.pdb"
   "Application_Security"
+  "Application_Security.pdb"
+  "CMakeFiles/Application_Security.dir/main.c.o"
 )
 
 # Per-language clean rules from dependency scanning.

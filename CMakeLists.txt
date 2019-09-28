@@ -3,4 +3,4 @@ project(Application_Security C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Application_Security spell.c)
+add_executable(Application_Security main.c)
