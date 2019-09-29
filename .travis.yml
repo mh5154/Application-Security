@@ -6,5 +6,5 @@ compiler:
   - gcc
 script:
   - make
-  - maketest
+  - make test
 
