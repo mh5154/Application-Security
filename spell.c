@@ -67,7 +67,7 @@ bool check_word(const char* word, hashmap_t hashtable[])
         //printf("HashWord: %s \n", hashtable[bucket]->word);
         if (strcmp(hashtable[bucket]->word, lowerWord) == 0)
         {
-            printf("TRUE 1 right: %s \n", lowerWord);
+            //printf("TRUE 1 right: %s \n", lowerWord);
             return true;
         }
         else
