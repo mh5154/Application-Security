@@ -5,7 +5,7 @@
 #include "string.h"
 #include "ctype.h"
 
-//10AM9/28
+//9/27/28 @ 7:17pm
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 {
