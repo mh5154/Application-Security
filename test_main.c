@@ -1,4 +1,4 @@
-/*#include <check.h>
+#include <check.h>
 #include "dictionary.h"
 #include <stdlib.h>
 
@@ -20,7 +20,7 @@ START_TEST(test_check_word_normal)
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
     const char* correct_word = "Justice";
-    const char* punctuation_word_2 = "pl.ace";
+    const char* punctuation_word_2 = "place";
     ck_assert(check_word(correct_word, hashtable));
     ck_assert(!check_word(punctuation_word_2, hashtable));
     // Test here: What if a word begins and ends with "?
@@ -77,4 +77,4 @@ main(void)
     srunner_free(runner);
     return (failed == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
-*/
+
