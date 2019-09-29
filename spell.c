@@ -31,15 +31,28 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
                 word[strlen(word)-1] = '\0';
                 wordEnd--;
             }
+            /*for(int y = 0; y < strlen(word); y++)
+            {
+                if(ispunct(word[i]))
+                {
+                    for(int a = y; a < strlen(word); a++)
+                        word[a] = word[a+1];
+                }
+            }*/
+            //printf("Current word: %s\n", word);
             if (check_word(word, hashtable) == false)
             {
-                misspelled[num_misspelled] = word;
+                misspelled[num_misspelled] = (char*)malloc(sizeof(word));
+                strncpy(misspelled[num_misspelled], word, LENGTH);
                 num_misspelled++;
+                //free(misspelled[num_misspelled]);
             }
             for(int s = 0; s < word[strlen(word)-1]; s++)
                 word[s] = '\0';
         }
     }
+
+
 
 return num_misspelled;
 }
@@ -48,6 +61,7 @@ return num_misspelled;
 
 bool check_word(const char* word, hashmap_t hashtable[])
 {
+
     int bucket = 0;
     char lowerWord[LENGTH] = "";
     for(int i = 0; i < strlen(word); i++)
@@ -140,7 +154,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
             bucket = hash_function(lowerWord);
 
             if(hashtable[bucket] == NULL)
+            {
                 hashtable[bucket] = newNode;
+            }
             else
             {
                 newNode->next = hashtable[bucket];
