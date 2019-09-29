@@ -12,7 +12,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
     int num_misspelled = 0;
     char word[LENGTH] = "";
 
-    while(fscanf(fp, "%s", word) != EOF)
+    while(fscanf(fp, "%44s", word) != EOF)
     {
 
         for(int i = 0; i < strlen(word); i++) //Use LENGTH or strlen() here????
@@ -133,7 +133,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
         char lowerWord[LENGTH] = "";
         int bucket = 0;
 
-        while(fscanf(fp, "%s", readWord) != EOF)
+        while(fscanf(fp, "%44s", readWord) != EOF)
         {
             for(int i = 0; i < strlen(readWord); i++)
             {
