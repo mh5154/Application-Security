@@ -6,20 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/mhamdan03/Application-Security/dictionary.c
-stdbool.h
--
-stdio.h
--
-stdlib.h
--
-string.h
--
-ctype.h
--
-dictionary.h
-/home/mhamdan03/Application-Security/dictionary.h
-
 /home/mhamdan03/Application-Security/dictionary.h
 stdbool.h
 -
@@ -43,8 +29,6 @@ stdlib.h
 /home/mhamdan03/Application-Security/stdlib.h
 dictionary.h
 /home/mhamdan03/Application-Security/dictionary.h
-dictionary.c
-/home/mhamdan03/Application-Security/dictionary.c
 string.h
 /home/mhamdan03/Application-Security/string.h
 ctype.h

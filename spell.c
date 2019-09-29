@@ -1,11 +1,11 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "dictionary.h"
-#include "dictionary.c"
+//#include "dictionary.c"
 #include "string.h"
 #include "ctype.h"
 
-//9/27/28 @ 7:17pm
+//9/28/19 @ 8:13 PM
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 {
